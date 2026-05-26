@@ -1,0 +1,43 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: researcher-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/researcher_service
+    username: ${PROG_DB_USER}
+    password: ${PROG_DB_PASS}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  session:
+    store-type: none
+
+  sql:
+    init:
+      mode: never
+
+resilience4j:
+  retry:
+    retry-aspect-order: 2
+    instances:
+      auditLogRetry:
+        maxAttempts: 3
+        waitDuration: 2s
+        retry-exceptions:
+          - java.io.IOException
+          - feign.FeignException
+  circuitbreaker:
+    circuit-breaker-aspect-order: 1
+    instances:
+      auditLogCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        record-exceptions:
+          - java.io.IOException
+          - feign.FeignException

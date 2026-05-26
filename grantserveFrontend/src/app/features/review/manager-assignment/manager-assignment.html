@@ -1,0 +1,72 @@
+<div class="container-fluid mt-4">
+  <h2 class="mb-4">Manager Assignment Console</h2>
+
+  <div class="row">
+    <!-- LEFT SIDE: Applications List -->
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">1. Received Applications</h5>
+        </div>
+        <div class="list-group list-group-flush" style="max-height: 600px; overflow-y: auto;">
+          <!-- Track by index to prevent NG0955 warnings if IDs are missing -->
+          @for (app of applications(); track $index) {
+            <button type="button" 
+                    (click)="selectApplication(app.applicationID)"
+                    [class.active]="selectedApplicationId === app.applicationID"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <div>
+                <strong>App #{{app.applicationID}}</strong><br>
+                <small>{{app.applicantName}}</small>
+              </div>
+              <span class="badge bg-secondary rounded-pill">View Proposals</span>
+            </button>
+          } @empty {
+            <div class="p-3 text-center text-muted">No applications found.</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: Proposals & Assignment -->
+    <div class="col-md-6">
+      @if (selectedApplicationId) {
+        <div class="card shadow-sm border-info">
+          <div class="card-header bg-info text-white">
+            <h5 class="mb-0">2. Proposals for App #{{selectedApplicationId}}</h5>
+          </div>
+          <div class="card-body">
+            <label class="form-label fw-bold">Select a Proposal:</label>
+            <select class="form-select mb-3" [(ngModel)]="selectedProposalId">
+              <option [ngValue]="null">-- Choose Proposal --</option>
+              @for (p of proposals(); track $index) {
+                <option [value]="p.proposalID">Proposal #{{p.proposalID}} - {{p.status}}</option>
+              }
+            </select>
+
+            <label class="form-label fw-bold">Assign to Reviewer:</label>
+            <div class="input-group">
+              <select class="form-select" [(ngModel)]="selectedReviewerId">
+                <option [ngValue]="null">-- Choose Reviewer --</option>
+                  @for (r of reviewers(); track $index) {
+                  <!-- Double check if it is r.userID, r.userId, or r.id -->
+                  <option [value]="r.userid">{{r.name}} (ID: {{r.userid}})</option>
+                  }
+                </select>
+              <button class="btn btn-success" 
+                      [disabled]="!selectedProposalId || !selectedReviewerId"
+                      (click)="submitAssignment()">
+                Confirm Assignment
+              </button>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <div class="alert alert-light border text-center p-5">
+          <i class="bi bi-arrow-left-circle d-block mb-3" style="font-size: 2rem;"></i>
+          Select an application from the list to see available proposals.
+        </div>
+      }
+    </div>
+  </div>
+</div>

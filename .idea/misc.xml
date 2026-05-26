@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/GrantServe/Api-Gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/admin-server/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/Auth-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/audit-service/audit_compliance_service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/budget-service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/review-service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/program-service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/security-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/service-registry/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/audit-log-service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/evaluation-service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/researcher-service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/Application-service/pom.xml" />
+        <option value="$PROJECT_DIR$/GrantServe/disbursement-service/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-25" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

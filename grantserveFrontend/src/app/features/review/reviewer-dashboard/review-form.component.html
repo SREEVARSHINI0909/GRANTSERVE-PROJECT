@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <!-- Left Side: Proposal Info -->
+    <div class="col-md-5">
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-dark text-white py-3">
+          <h5 class="mb-0">Review Assignment #{{ reviewData?.reviewID }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="text-muted small d-block">PROPOSAL ID</label>
+            <span class="fw-bold">{{ reviewData?.proposalID }}</span>
+          </div>
+          <div class="mb-3">
+            <label class="text-muted small d-block">CURRENT STATUS</label>
+            <span class="badge bg-warning text-dark">{{ reviewData?.status }}</span>
+          </div>
+          <hr>
+          <div class="text-center p-4 bg-light rounded border">
+            <i class="bi bi-file-earmark-pdf text-danger fs-1"></i>
+            <p class="mt-2 mb-0"><strong>Proposal Document</strong></p>
+            
+            <!-- Use [href] with the sanitized URL to open in a new tab -->
+            <a [href]="getSafeUrl(reviewData?.fileURI)" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-sm btn-outline-primary mt-3">
+              <i class="bi bi-box-arrow-up-right me-1"></i> View Full Document
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Submission Form -->
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white py-3">
+          <h5 class="mb-0">Evaluation Details</h5>
+        </div>
+        <div class="card-body">
+          <form #evalForm="ngForm" (ngSubmit)="submitReview()">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Assign Score (0 - 10)</label>
+              <input type="number" class="form-control" [(ngModel)]="score" name="score" required min="0" max="10" placeholder="Enter score">
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Reviewer Comments</label>
+              <textarea class="form-control" [(ngModel)]="comments" name="comments" rows="6" required placeholder="Enter feedback..."></textarea>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-success flex-grow-1 py-2" [disabled]="!evalForm.valid">
+                Submit Final Review
+              </button>
+              <button type="button" class="btn btn-light border flex-grow-1 py-2" (click)="router.navigate(['/reviewer-dashboard'])">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
